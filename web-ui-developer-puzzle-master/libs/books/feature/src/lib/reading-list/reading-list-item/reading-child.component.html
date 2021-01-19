@@ -1,0 +1,36 @@
+<div>
+    <button
+      mat-icon-button
+      [color]="book.finished ? 'primary' : null"
+      [attr.aria-label]="'Mark ' + book.title + ' as read/finished'"
+      (click)="toggleMarkedAsRead(book)"
+    >
+      <mat-icon>{{ book.finished ? 'star' : 'star_outline' }}</mat-icon>
+    </button>
+  </div>
+  <div>
+    <img
+      class="reading-list-item--cover"
+      [src]="book.coverUrl"
+      [attr.alt]="book.title + ' Cover'"
+    />
+  </div>
+  <div class="reading-list-item--details">
+    <strong class="reading-list-item--details--title">{{ book.title }}</strong>
+    <div class="reading-list-item--details--author">
+      {{ book.authors.join(',') }}
+    </div>
+    <div *ngIf="book.finished" class="reading-list-item--details--finished">
+      <em>Finished: {{ book.finishedDate | date: 'medium' }}</em>
+    </div>
+  </div>
+  <div>
+    <button
+      mat-icon-button
+      color="warn"
+      [attr.aria-label]="'Remove ' + book.title + ' from reading list'"
+      (click)="removeFromReadingList(book)"
+    >
+      <mat-icon>remove_circle</mat-icon>
+    </button>
+  </div>
