@@ -3,6 +3,8 @@ import { Book, ReadingListItem } from '@tmo/shared/models';
 
 export const init = createAction('[Reading List] Initialize');
 
+export const loadReadingList = createAction('[Reading List] Load list');
+
 export const loadReadingListSuccess = createAction(
   '[Reading List API] Load list success',
   props<{ list: ReadingListItem[] }>()
@@ -39,5 +41,25 @@ export const failedRemoveFromReadingList = createAction(
 
 export const confirmedRemoveFromReadingList = createAction(
   '[Reading List API] Confirmed remove from list',
+  props<{ item: ReadingListItem }>()
+);
+
+export const toggleMarkedAsRead = createAction(
+  '[Reading List] Mark as read',
+  props<{item : ReadingListItem }>()
+);
+
+export const failedToggleMarkedAsRead = createAction(
+  '[Reading List] Mark as read',
+  props<{item : ReadingListItem }>()
+);
+
+export const unToggledMarkedAsRead = createAction(
+  '[Reading List] Undo toggled marked as read',
+  props<{item : ReadingListItem }>()
+);
+
+export const confirmedMarkedAsRead = createAction(
+  '[Reading List] Confirmed mark as read',
   props<{ item: ReadingListItem }>()
 );
