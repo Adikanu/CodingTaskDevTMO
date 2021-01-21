@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {getReadingList, removeFromReadingList } from '@tmo/books/data-access';
-import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
-import { UndoComponent } from '../undo/undo.component';
-
+import {getReadingList, removeFromReadingList, undoRemoveFromReadingList } from '@tmo/books/data-access';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'tmo-reading-list',
@@ -13,26 +12,23 @@ import { UndoComponent } from '../undo/undo.component';
 export class ReadingListComponent {
   readingList$ = this.store.select(getReadingList);
 
-   removed = false;
-
-  configSuccess: MatSnackBarConfig = {
-    panelClass: 'style-success',
-    duration: 5000,
-    horizontalPosition: 'center',
-    verticalPosition: 'bottom'
-  };
-
   constructor(
     private readonly store: Store,
     private readonly sb: MatSnackBar
     ) {}
 
   removeFromReadingList(item) {
-    this.removed = true;
+  
     this.store.dispatch(removeFromReadingList({ item }));
-    this.sb.openFromComponent(UndoComponent, {
-      data: item,
-      ...this.configSuccess
+  
+    const snackBarRef = this.sb.open(
+        `${item.title} removed `,
+        'Undo',
+        {duration: 7000}
+    );
+
+    snackBarRef.onAction().pipe(take(1)).subscribe(() => {
+       this.store.dispatch(undoRemoveFromReadingList({item}))
     });
   }
 
