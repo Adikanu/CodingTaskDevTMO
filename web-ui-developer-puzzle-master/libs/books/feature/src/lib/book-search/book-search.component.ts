@@ -1,4 +1,4 @@
-import { Component, OnInit , ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit , ChangeDetectionStrategy ,OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   addToReadingList,
@@ -16,7 +16,7 @@ import { Book } from '@tmo/shared/models';
   styleUrls: ['./book-search.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookSearchComponent implements OnInit {
+export class BookSearchComponent implements OnInit , OnDestroy{
   books: ReadingListBook[];
 
   searchForm = this.fb.group({
@@ -60,4 +60,6 @@ export class BookSearchComponent implements OnInit {
       this.store.dispatch(clearSearch());
     }
   }
+
+  ngOnDestroy(): void{}
 }
