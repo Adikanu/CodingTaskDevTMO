@@ -1,4 +1,4 @@
-import { Component, OnInit , OnDestroy } from '@angular/core';
+import { Component, OnInit , ChangeDetectionStrategy ,OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   addToReadingList,
@@ -15,9 +15,10 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'tmo-book-search',
   templateUrl: './book-search.component.html',
-  styleUrls: ['./book-search.component.scss']
+  styleUrls: ['./book-search.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookSearchComponent implements OnInit  ,OnDestroy{
+export class BookSearchComponent implements OnInit , OnDestroy{
   books: ReadingListBook[];
 
   handleSearch$ = new Subject<void>();
