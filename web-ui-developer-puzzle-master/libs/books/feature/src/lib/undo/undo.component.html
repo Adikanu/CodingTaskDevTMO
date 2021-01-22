@@ -1,0 +1,26 @@
+<div class="flex">
+  <div class="data">{{'Undo ' + data.title}}</div>
+  <div *ngIf="operation">
+    <button
+      mat-icon-button
+      color="primary"
+      [attr.aria-label]="'Undo REMOVE'"
+      (click)="undoRemove()"
+    >
+      <mat-icon>autorenew</mat-icon>
+    </button>
+  </div>
+
+
+  <div *ngIf="!operation">
+    <button
+      mat-icon-button
+      color="primary"
+      [attr.aria-label]="'Undo ADD'"
+      (click)="undoAdd()"
+    >
+      <mat-icon>autorenew</mat-icon>
+    </button>
+  </div>
+</div>
+
