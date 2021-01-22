@@ -46,3 +46,13 @@ export const getAllBooks = createSelector<
 export const getReadingList = createSelector(getReadingListState, selectAll);
 
 export const getTotalUnread = createSelector(getReadingListState, selectTotal);
+
+export const getBookUnFinished = createSelector(
+  getAllBooks ,
+  (state:   ReadingListBook[]) => state.map(x => x.isFinished)
+)
+
+export const getAllFinishedBooks = createSelector(
+  getAllBooks ,
+  (state:   ReadingListBook[]) => state.map(x => !x.isFinished)
+)

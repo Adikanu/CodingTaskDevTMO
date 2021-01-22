@@ -48,4 +48,25 @@ describe('ReadingList Selectors', () => {
       expect(result).toBe(3);
     });
   });
+
+
+  describe('Books Finished', () => {
+    it('toggleMarkedAsRead() should return at least one book is marked finished', () => {
+     
+    
+
+      const finishedBooks = ToReadSelectors.getAllFinishedBooks(state);
+      expect(finishedBooks.includes(true)).toBe(true);
+    });
+
+    it('untoggleMarkedAsRead() should return none of the books are  marked finished', () => {
+     
+
+      const finishedBooks = ToReadSelectors.getBookUnFinished(state);
+
+      expect(finishedBooks.includes(true)).toBe(false);
+    });
+
+
+  });
 });
