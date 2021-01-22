@@ -80,10 +80,6 @@ export class BookSearchComponent implements OnInit , OnDestroy{
     }
   }
 
-  
-  
-  
-  
   ngOnDestroy(): void{
     this.handleSearch$.next();
     this.handleSearch$.complete();
