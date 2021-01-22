@@ -12,7 +12,8 @@ describe('Books Selectors', () => {
         {
           ...initialState,
           error: 'Unknown error',
-          loaded: true
+          loaded: true,
+          searchTerm: 'Todd Motto'
         }
       )
     };
@@ -36,6 +37,14 @@ describe('Books Selectors', () => {
       const result = BooksSelectors.getBooksError(state);
 
       expect(result).toEqual('Unknown error');
+    });
+
+    it('getSearchTerm() should return the current search term' ,() => {
+       
+      const result = BooksSelectors.getSearchTerm(state);
+
+      expect(result).toEqual('Todd Motto');
+
     });
   });
 });
